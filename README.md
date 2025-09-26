@@ -12,13 +12,49 @@ It demonstrates the bias–variance trade-off:
 Outputs:
 - Train and test accuracy for each specified max_depth.
 
+  
+
 Question 8:
 
-We trained a k-Nearest Neighbors model with k = 5 and checked how well it predicts flower species on a held-out test set. We report accuracy (overall correctness), a confusion matrix (where the model mixes up classes), and precision, recall, and F1 for each species (plus macro/micro averages). We also plot ROC curves in a one-vs-rest setup and compute AUC to show how well each class is separated.
+Objective
+Build a k-Nearest Neighbors classifier using two Iris features (typically sepal length and sepal width) and visualize decision boundaries for multiple k values (e.g., k = 1, 3, 5, 10).
 
-How to read it: the confusion matrix tells you which species get confused most; high precision means few false alarms, high recall means few misses, and F1 balances both. Macro-averages treat all species equally; micro-averages weight by sample count. AUC closer to 1.0 means the class is easy to distinguish.
+Data & Features
+Use the Iris dataset with exactly two features for plotting in 2D. Common choice: sepal_length (x-axis) and sepal_width (y-axis). Encode targets as three classes: setosa, versicolor, virginica.
 
-Deliverables: printed metrics, the confusion matrix, and per-class ROC curves with AUC.
-Bottom line: use the matrix to spot confusions, F1 for balanced performance, and AUC to judge class separability.
+Procedure
+
+Load Iris and select the two features (X ∈ ℝ²) and labels (y).
+
+(Optional) Standardize features—useful if scales differ; with sepal features it’s less critical but still recommended for consistency.
+
+For each k in {1, 3, 5, 10}:
+
+Fit kNN on the selected two features.
+
+Create a mesh grid over the feature range and predict class on each grid point.
+
+Plot the decision region (background) and overlay the true data points with class colors and a legend.
+
+Add axis labels and a concise title indicating the k value.
+
+
+
+
+Question 9:
+
+Split the data into train and test (e.g., 70/30) using stratification on the labels.
+
+Train kNN with k=5 on the training set.
+
+Predict class labels on the test set and obtain predicted probabilities for ROC/AUC.
+
+Compute the confusion matrix (sklearn.metrics.confusion_matrix) and display it with class names (setosa, versicolor, virginica).
+
+Report accuracy and print precision, recall, and F1 per class, including macro and micro averages (classification_report).
+
+For multi-class ROC, binarize the labels (one-vs-rest), plot a ROC curve for each class using predicted probabilities, and compute per-class AUC; also report micro- and macro-average AUC.
+
+Summarize key observations: which classes are most often confused, whether metrics are balanced across classes, and how separable the classes look from ROC/AUC.
 
 
